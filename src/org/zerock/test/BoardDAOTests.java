@@ -3,6 +3,7 @@ package org.zerock.test;
 import org.junit.Test;
 import org.zerock.dao.BoardDAO;
 import org.zerock.domain.BoardVO;
+import org.zerock.domain.Criteria;
 
 import lombok.extern.log4j.Log4j;
 
@@ -10,6 +11,18 @@ import lombok.extern.log4j.Log4j;
 public class BoardDAOTests {
 
 	BoardDAO dao = BoardDAO.getInstance();
+	
+	@Test
+	public void listTest()throws Exception{
+		
+		Criteria cri = new Criteria(3);
+		
+		dao.getPage(cri).forEach(board ->
+		log.info(board));
+		
+	}
+	
+	
 	
 	@Test
 	public void deleteTest()throws Exception{
