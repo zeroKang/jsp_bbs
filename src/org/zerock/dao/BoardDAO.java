@@ -73,6 +73,29 @@ public class BoardDAO {
 
 		return list;
 	}
+	
+	public void update(BoardVO vo)throws Exception{
+		
+		StringBuffer buffer = new StringBuffer();
+		
+		buffer.append("update tbl_board set title=?, content= ?, updatedate = sysdate  ");
+		buffer.append("where bno = ?");
+		
+		new SQLTemplate() {
+			
+			@Override
+			public void runSQL() throws Exception {
+				pstmt = con.prepareStatement(buffer.toString());
+				
+				pstmt.setString(1, vo.getTitle());
+				pstmt.setString(2, vo.getContent());
+				pstmt.setInt(3, vo.getBno());
+				
+				log.info("Update count: " + pstmt.executeUpdate());
+			}
+		}.execute();
+		
+	}
 
 	public void delete(Integer bno) throws Exception {
 

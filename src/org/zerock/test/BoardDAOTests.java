@@ -13,6 +13,25 @@ public class BoardDAOTests {
 	BoardDAO dao = BoardDAO.getInstance();
 	
 	@Test
+	public void modifyTest()throws Exception{
+		
+		BoardVO vo = dao.read(10241);
+		
+		log.info("-----------before-------------");
+		log.info(vo);
+		
+		vo.setTitle("수정 테스트");
+		vo.setContent("수정 테스트 내용");
+		
+		dao.update(vo);
+		
+		log.info("-------------after------------------");
+
+		log.info(dao.read(10241));
+		
+	}
+	
+	@Test
 	public void listTest()throws Exception{
 		
 		Criteria cri = new Criteria(3);

@@ -30,10 +30,13 @@
 						</tr>
 					</thead>
 					<tbody>
+					
+					
+					
 						<c:forEach items="${list}" var="vo">
 							<tr class="odd gradeX">
 								<td><c:out value="${vo.bno}"/></td>
-								<td><c:out value="${vo.title}"/></td>
+								<td><a href='/board/view?page=${pm.page}&bno=${vo.bno}'><c:out value="${vo.title}"/></a></td>
 								<td><c:out value="${vo.writer}"/></td>
 								<td class="center"><c:out value="${vo.regdate}"/></td>
 								<td class="center"><c:out value="${vo.viewcnt}"/></td>
@@ -41,6 +44,21 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				
+				<div>
+				
+				
+<ul class="pagination">
+  <c:if test="${pm.prev}"><li><a href="/board/list?page=${pm.start -1 }"> 이전</a>  </li></c:if>
+  <c:forEach begin="${pm.start}" end="${pm.end}" var="num">
+  <li class="${num == pm.page?'active':''}"><a href="/board/list?page=${num}"> ${num}</a>  </li>
+  </c:forEach>
+  <c:if test="${pm.next}"><li> <a href="/board/list?page=${pm.end +1}"> 다음</a>  </li></c:if>
+</ul>
+				
+				
+				</div>
+				
 			</div>
 			<!-- /.panel-body -->
 		</div>
@@ -51,3 +69,6 @@
 <!-- /.row -->
 
 <%@include file="../includes/footer.jsp"%>
+
+
+
