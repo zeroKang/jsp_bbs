@@ -10,6 +10,8 @@ import lombok.extern.log4j.Log4j;
 public class Criteria {
 
 	private int page;
+	private String type;
+	private String keyword;
 	
 	public Criteria() {
 		this.page = 1;
@@ -19,21 +21,13 @@ public class Criteria {
 		this.page = page;
 	}
 	
-	public String getLink(String url, Integer bno) {
-		
-		StringBuffer buffer = new StringBuffer();
-		buffer.append(url);
-		buffer.append("?page=" + page);
-		
-		log.info("=====================================");
-		log.info(bno);
-		
-		if(bno != null && bno > 0) {
-			buffer.append("&bno=" +bno);
-		}
-		
-		return buffer.toString();
+	public Criteria(int page, String type, String keyword) {
+		this.page = page;
+		this.type = type;
+		this.keyword = keyword;
 	}
+	
+
 }
 
 

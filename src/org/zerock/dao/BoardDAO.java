@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.zerock.domain.BoardVO;
 import org.zerock.domain.Criteria;
+import org.zerock.domain.SQLGenerator;
 
 import lombok.extern.log4j.Log4j;
 
@@ -25,7 +26,12 @@ public class BoardDAO {
 
 	public List<BoardVO> getPage(Criteria cri) throws Exception {
 
+		
+		SQLGenerator sqlGen = new SQLGenerator(cri.getType(), cri.getKeyword());
+		
 		StringBuffer buffer = new StringBuffer();
+		
+		
 		buffer.append("select  ");
 		buffer.append(" bno,title,content,writer,viewcnt, ");
 		buffer.append(" regdate, updatedate, cnt  ");
@@ -36,10 +42,17 @@ public class BoardDAO {
 		buffer.append("     viewcnt, regdate, updatedate, count(bno) over() cnt ");
 		buffer.append("    from tbl_board  ");
 		buffer.append("    where bno > 0 ");
+		
+		buffer.append(sqlGen.makeSQL());
+		
 		buffer.append("    and rownum <= ( CEIL(?/10) *100) +1 ");
 		buffer.append("  ) ");
 		buffer.append("where rn > (? -1) * 10 and rn <= (? * 10)   ");
 
+		log.info("=========================");
+		log.info(buffer.toString());
+		
+		
 		List<BoardVO> list = new ArrayList<>();
 
 		new SQLTemplate() {
@@ -48,9 +61,19 @@ public class BoardDAO {
 			public void runSQL() throws Exception {
 
 				pstmt = con.prepareStatement(buffer.toString());
-				pstmt.setInt(1, cri.getPage());
-				pstmt.setInt(2, cri.getPage());
-				pstmt.setInt(3, cri.getPage());
+				
+				int qidx = 1;
+				
+				int count = sqlGen.getCount();
+				
+				for(int i = 0; i < count; i++) {
+					
+					pstmt.setString(qidx++, cri.getKeyword());
+				}
+				
+				pstmt.setInt(qidx++, cri.getPage());
+				pstmt.setInt(qidx++, cri.getPage());
+				pstmt.setInt(qidx++, cri.getPage());
 
 				rs = pstmt.executeQuery();
 

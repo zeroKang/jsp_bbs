@@ -34,7 +34,7 @@ public class BoardDAOTests {
 	@Test
 	public void listTest()throws Exception{
 		
-		Criteria cri = new Criteria(3);
+		Criteria cri = new Criteria(1,"TCW","6");
 		
 		dao.getPage(cri).forEach(board ->
 		log.info(board));
