@@ -7,7 +7,7 @@ public class SQLLoader {
 
 	public static void main(String[] args) throws Exception{
 		
-		String path = "C:\\zzz\\0404.sql";
+		String path = "C:\\zzz\\0406.sql";
 		
 		Scanner scanner = new Scanner(new File(path),"UTF-8");
 		
