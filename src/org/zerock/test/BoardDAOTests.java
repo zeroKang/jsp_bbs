@@ -11,10 +11,24 @@ public class BoardDAOTests {
 
 	BoardDAO dao = BoardDAO.getInstance();
 	
+	@Test
+	public void deleteTest()throws Exception{
+		
+		dao.delete(10);
+	}
+	
 	@Test	
 	public void testConnection() throws Exception{
 		
 		dao.testConnection();
+	}
+	
+	@Test
+	public void testRead()throws Exception{
+		
+		log.info(dao.read(10));
+		
+		
 	}
 	
 	@Test
