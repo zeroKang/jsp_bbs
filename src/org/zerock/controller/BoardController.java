@@ -26,7 +26,7 @@ public class BoardController extends AbstractController {
 	
 	public String viewGET(JRRequest req, HttpServletResponse res)throws Exception{
 		
-		Criteria cri = new Criteria(req.paramInt("page",1));
+		Criteria cri = new Criteria(req.paramInt("page",1), req.param("type"), req.param("keyword"));
 		
 		boolean update = true;
 		
@@ -45,7 +45,7 @@ public class BoardController extends AbstractController {
 	
 	public String modifyGET(JRRequest req, HttpServletResponse res)throws Exception{
 		
-		Criteria cri = new Criteria(req.paramInt("page",1));
+		Criteria cri = new Criteria(req.paramInt("page",1), req.param("type"), req.param("keyword"));
 		
 		boolean update = false;
 		
@@ -58,7 +58,7 @@ public class BoardController extends AbstractController {
 	
 	public String modifyPOST(JRRequest req, HttpServletResponse res)throws Exception{
 		
-		Criteria cri = new Criteria(req.paramInt("page",1));
+		Criteria cri = new Criteria(req.paramInt("page",1), req.param("type"), req.param("keyword"));
 		
 		BoardVO vo = new BoardVO();
 		vo.setBno(req.paramInt("bno", 0));
@@ -96,9 +96,10 @@ public class BoardController extends AbstractController {
 	
 	public String listGET(JRRequest req, HttpServletResponse res)throws Exception{
 		
-		log.info("list ...get");
+		log.info("list ...get :" + req.param("keyword"));
 		
-		Criteria cri = new Criteria(req.paramInt("page",1));
+		Criteria cri = 
+			new Criteria(req.paramInt("page",1), req.param("type"), req.param("keyword"));
 		
 		List<BoardVO> list = BoardDAO.getInstance().getPage(cri);
 		

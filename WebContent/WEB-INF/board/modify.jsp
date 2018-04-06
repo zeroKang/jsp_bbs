@@ -18,42 +18,45 @@
 			<div class="panel-body">
 
 				<form action="/board/modify" method="post" target="zero">
-				<input type='hidden' name='page' value='${cri.page}'>
-				<div class="form-group">
-					<label>Bno</label> 
-					<input class="form-control" name='bno' 
-						value='<c:out value="${vo.bno }"/>' readonly="readonly">
-				</div>	
-				<div class="form-group">
-					<label>Title</label> <input class="form-control" name='title'
-						value='<c:out value="${vo.title }"/>'>
-				</div>
-
-				<div class="form-group">
-					<label>Text area</label>
-					<textarea class="form-control" rows="3" name='content'><c:out value="${vo.content }"/></textarea>
-				</div>
-
-				<div class="form-group">
-					<label>Writer</label> <input class="form-control" name='writer'
-						value='<c:out value="${vo.writer }"/>' readonly="readonly">
-				</div>
-				
-				<button class="btn btn-default">Modify</button>
-				</form>
-				
-				<form role="form" action="/board/remove" method="post" target="zero">
-				  <input type='hidden' name='page' value='${cri.page}'>
-				  <input type='hidden' name='bno' value='${vo.bno}'>
-				  <button class="btn btn-default">Delete</button>
-				</form>
-				
-				<form role="form" action="/board/list"
-					method="get">
 					<input type='hidden' name='page' value='${cri.page}'>
+					<div class="form-group">
+						<label>Bno</label> <input class="form-control" name='bno'
+							value='<c:out value="${vo.bno }"/>' readonly="readonly">
+					</div>
+					<div class="form-group">
+						<label>Title</label> <input class="form-control" name='title'
+							value='<c:out value="${vo.title }"/>'>
+					</div>
+
+					<div class="form-group">
+						<label>Text area</label>
+						<textarea class="form-control" rows="3" name='content'><c:out
+								value="${vo.content }" /></textarea>
+					</div>
+
+					<div class="form-group">
+						<label>Writer</label> <input class="form-control" name='writer'
+							value='<c:out value="${vo.writer }"/>' readonly="readonly">
+					</div>
+
+					<button class="btn btn-default">Modify</button>
+				</form>
+
+				<form role="form" action="/board/remove" method="post" target="zero">
+					<input type='hidden' name='page' value='${cri.page}'> <input
+						type='hidden' name='bno' value='${vo.bno}'> <input
+						type='hidden' name='keyword' value='${cri.keyword}'> <input
+						type='hidden' name='type' value='${cri.type}'>
+					<button class="btn btn-default">Delete</button>
+				</form>
+
+				<form role="form" action="/board/list" method="get">
+					<input type='hidden' name='page' value='${cri.page}'> <input
+						type='hidden' name='keyword' value='${cri.keyword}'> <input
+						type='hidden' name='type' value='${cri.type}'>
 					<button class="btn btn-default">LIST</button>
 				</form>
-				
+
 
 
 			</div>
@@ -75,7 +78,7 @@ iframe {
 <script>
 	function showMsg(msg) {
 		alert(msg);
-		self.location = "/board/list?page=${cri.page}";
+		self.location = "/board/list?${cri.getLink(null)}";
 	}
 </script>
 

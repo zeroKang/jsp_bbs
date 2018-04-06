@@ -27,6 +27,28 @@ public class Criteria {
 		this.keyword = keyword;
 	}
 	
+	public String getLink(Integer pageValue) {
+		
+		StringBuffer buffer = new StringBuffer();
+		
+		if(pageValue == null) {
+			buffer.append("page="+page);
+		}else {
+			buffer.append("page="+pageValue);
+		}
+		
+		
+		if(type != null) {
+			buffer.append("&type="+type);
+		}
+		
+		if(keyword != null) {
+			buffer.append("&keyword="+keyword);
+		}
+		return buffer.toString();
+		
+	}
+	
 
 }
 
