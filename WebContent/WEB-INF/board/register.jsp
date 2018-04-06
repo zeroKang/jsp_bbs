@@ -28,7 +28,7 @@
           </div>
 
           <div class="form-group">
-            <label>Writer</label> <input class="form-control" name='writer' value='user01'>
+            <label>Writer</label> <input class="form-control" name='writer' value='<c:out value="${member.userid }"/>' readonly="readonly">
           </div>
           <button type="submit" class="btn btn-default">Submit
             Button</button>
