@@ -3,12 +3,14 @@ package org.zerock.controller;
 import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 import org.zerock.dao.BoardDAO;
 import org.zerock.domain.BoardVO;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.PageMaker;
+import org.zerock.util.CookieUtil;
 
 import lombok.extern.log4j.Log4j;
 
@@ -28,7 +30,27 @@ public class BoardController extends AbstractController {
 		
 		Criteria cri = new Criteria(req.paramInt("page",1), req.param("type"), req.param("keyword"));
 		
-		boolean update = true;
+		Cookie ck = CookieUtil.findCookie(req, "views");
+		
+		boolean update = false;
+		
+		if(ck != null) {
+			if(CookieUtil.checkValue(ck.getValue(), "|"+req.paramInt("bno", 0))) {
+				update = false;
+			}else {
+				update = true;
+				String str = CookieUtil.valueAppend(ck, "|"+req.paramInt("bno", 0));
+				ck.setValue(str);
+			}
+		}else {
+			ck = new Cookie("views", "|"+req.paramInt("bno", 0));
+			update = true;
+		}
+		ck.setMaxAge(60*60*24);
+		
+		log.info("COOKIE>>>>>>>>>>>>>>>>>>>>>>>");
+		res.addCookie(ck);
+		
 		
 		req.setAttribute("vo", BoardDAO.getInstance().read(req.paramInt("bno",0),update));
 		
