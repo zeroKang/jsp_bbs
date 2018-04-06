@@ -42,6 +42,11 @@
 
 <body>
 
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+
+
     <div id="wrapper">
 
         <!-- Navigation -->

@@ -17,12 +17,11 @@
 			<!-- /.panel-heading -->
 			<div class="panel-body">
 
-				
+
 				<div class="form-group">
-					<label>Bno</label> 
-					<input class="form-control" 
+					<label>Bno</label> <input class="form-control"
 						value='<c:out value="${vo.bno }"/>' readonly="readonly">
-				</div>	
+				</div>
 				<div class="form-group">
 					<label>Title</label> <input class="form-control" name='title'
 						value='<c:out value="${vo.title }"/>' readonly="readonly">
@@ -30,7 +29,8 @@
 
 				<div class="form-group">
 					<label>Text area</label>
-					<textarea class="form-control" rows="3" name='content' readonly><c:out value="${vo.content }"/></textarea>
+					<textarea class="form-control" rows="3" name='content' readonly><c:out
+							value="${vo.content }" /></textarea>
 				</div>
 
 				<div class="form-group">
@@ -38,21 +38,20 @@
 						value='<c:out value="${vo.writer }"/>' readonly="readonly">
 				</div>
 				<form role="form" action="/board/modify" method="get">
-				  <input type='hidden' name='page' value='${cri.page}'>
-				  <input type='hidden' name='bno' value='${vo.bno}'>
-				  <input type='hidden' name='keyword' value='${cri.keyword}'>
-				  <input type='hidden' name='type' value='${cri.type}'>
-				  <button class="btn btn-default">Modify/Delete</button>
+					<input type='hidden' name='page' value='${cri.page}'> <input
+						type='hidden' name='bno' value='${vo.bno}'> <input
+						type='hidden' name='keyword' value='${cri.keyword}'> <input
+						type='hidden' name='type' value='${cri.type}'>
+					<button class="btn btn-default">Modify/Delete</button>
 				</form>
-				
-				<form role="form" action="/board/list"
-					method="get">
-					<input type='hidden' name='page' value='${cri.page}'>
-					<input type='hidden' name='keyword' value='${cri.keyword}'>
-					<input type='hidden' name='type' value='${cri.type}'>
+
+				<form role="form" action="/board/list" method="get">
+					<input type='hidden' name='page' value='${cri.page}'> <input
+						type='hidden' name='keyword' value='${cri.keyword}'> <input
+						type='hidden' name='type' value='${cri.type}'>
 					<button class="btn btn-default">List</button>
 				</form>
-				
+
 
 
 			</div>
@@ -63,13 +62,52 @@
 </div>
 <!-- /.row -->
 
+<div class='row'>
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="form-group">
+					<form target='replyFrame' action="/reply/add" method="post">
+						<input type='hidden' name="bno" value='${vo.bno}'/>
+						<input type='hidden' name="replyer" value="${member.userid}"/>
+						<input type='text' name='reply' value=" REply Test">
+						<button>ADD Reply</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
 <style>
-iframe {
+body {
+	min-height: 2000px;
+}
+
+#zero {
 	width: 0px;
 	height: 0px;
 	border: 0px;
 }
+
+#replyFrame {
+	width: 100%;
+	border: 0px;
+	min-height: 500px;
+}
 </style>
+
+<div class='row'>
+
+	<iframe id='replyFrame' name='replyFrame' src="/reply/list?bno=${vo.bno}"> </iframe>
+
+</div>
+
+
 
 <script>
 	function showMsg(msg) {
@@ -79,6 +117,6 @@ iframe {
 </script>
 
 
-<iframe name='zero'> </iframe>
+<iframe id='zero' name='zero'> </iframe>
 
 <%@include file="../includes/footer.jsp"%>
