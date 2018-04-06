@@ -13,7 +13,9 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
-			<div class="panel-heading">Board List</div>
+			<div class="panel-heading">Board List
+			     <button class="btn-xs pull-right"><a href='/board/register'>Make New</a></button>
+			</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
 				<table width="100%"
@@ -24,17 +26,19 @@
 							<th>Title</th>
 							<th>Writer</th>
 							<th>RegDate</th>
-							<th>  </th>
+							<th>ViewCnt</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="odd gradeX">
-							<td>Trident</td>
-							<td>Internet Explorer 4.0</td>
-							<td>Win 95+</td>
-							<td class="center">4</td>
-							<td class="center">X</td>
-						</tr>
+						<c:forEach items="${list}" var="vo">
+							<tr class="odd gradeX">
+								<td><c:out value="${vo.bno}"/></td>
+								<td><c:out value="${vo.title}"/></td>
+								<td><c:out value="${vo.writer}"/></td>
+								<td class="center"><c:out value="${vo.regdate}"/></td>
+								<td class="center"><c:out value="${vo.viewcnt}"/></td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>

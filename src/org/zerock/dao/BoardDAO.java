@@ -69,9 +69,9 @@ public class BoardDAO {
 				}
 			}
 		}.execute();
-		;
+		
 
-		return null;
+		return list;
 	}
 
 	public void delete(Integer bno) throws Exception {
