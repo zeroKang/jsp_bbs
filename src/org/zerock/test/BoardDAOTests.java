@@ -15,7 +15,7 @@ public class BoardDAOTests {
 	@Test
 	public void modifyTest()throws Exception{
 		
-		BoardVO vo = dao.read(10241);
+		BoardVO vo = dao.read(10241,false);
 		
 		log.info("-----------before-------------");
 		log.info(vo);
@@ -27,7 +27,7 @@ public class BoardDAOTests {
 		
 		log.info("-------------after------------------");
 
-		log.info(dao.read(10241));
+		log.info(dao.read(10241,false));
 		
 	}
 	
@@ -58,7 +58,7 @@ public class BoardDAOTests {
 	@Test
 	public void testRead()throws Exception{
 		
-		log.info(dao.read(10));
+		log.info(dao.read(10, true));
 		
 		
 	}

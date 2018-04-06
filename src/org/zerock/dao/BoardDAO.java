@@ -115,7 +115,7 @@ public class BoardDAO {
 		}.execute();
 	}
 
-	public BoardVO read(Integer bno) throws Exception {
+	public BoardVO read(Integer bno, boolean update) throws Exception {
 
 		StringBuffer buffer = new StringBuffer();
 
@@ -127,6 +127,17 @@ public class BoardDAO {
 
 			@Override
 			public void runSQL() throws Exception {
+				
+				if(update) {
+					pstmt = con.prepareStatement("update tbl_board set viewcnt = viewcnt +1 where bno = ?");
+					
+					pstmt.setInt(1, bno);
+					
+					pstmt.executeUpdate();
+					pstmt.close();
+					pstmt = null;
+				}
+				
 
 				pstmt = con.prepareStatement(buffer.toString());
 				pstmt.setInt(1, bno);

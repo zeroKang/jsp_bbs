@@ -18,14 +18,17 @@ public abstract class SQLTemplate implements SQLFragment {
 	public void execute()throws Exception {		
 		try {
 			con = getConnection();
+			con.setAutoCommit(false);
 			runSQL();			
 			System.out.println("222...ResultSet: " + rs);
 			System.out.println("222...PreparedStatement: " + pstmt);
 			System.out.println("222...Connection : " + con);
 			
+			con.commit();
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+			con.rollback();
 		}finally {
 			closeAll(con,pstmt,rs);
 		}

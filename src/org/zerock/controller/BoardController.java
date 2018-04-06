@@ -28,7 +28,9 @@ public class BoardController extends AbstractController {
 		
 		Criteria cri = new Criteria(req.paramInt("page",1));
 		
-		req.setAttribute("vo", BoardDAO.getInstance().read(req.paramInt("bno",0)));
+		boolean update = true;
+		
+		req.setAttribute("vo", BoardDAO.getInstance().read(req.paramInt("bno",0),update));
 		
 		req.setAttribute("cri", cri);
 		
@@ -45,7 +47,9 @@ public class BoardController extends AbstractController {
 		
 		Criteria cri = new Criteria(req.paramInt("page",1));
 		
-		req.setAttribute("vo", BoardDAO.getInstance().read(req.paramInt("bno",0)));
+		boolean update = false;
+		
+		req.setAttribute("vo", BoardDAO.getInstance().read(req.paramInt("bno",0),update));
 		
 		req.setAttribute("cri", cri);
 		
